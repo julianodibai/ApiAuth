@@ -32,7 +32,16 @@ builder.Services.AddAuthentication(x =>
            ValidateAudience = false,
        };
    });
+
+//adicionando roles para testes de autorização
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("Admin", policy => policy.RequireRole("manager"));
+    x.AddPolicy("Employee", policy => policy.RequireRole("employee"));
+});
 #endregion
+
+#region Pipelines
 
 var app = builder.Build();
 
@@ -44,8 +53,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+#endregion

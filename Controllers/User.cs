@@ -4,11 +4,11 @@ namespace ApiAuth.Controllers
 {
     [ApiController]
     [Route("/api/v1")]
-    public class LoginAuth : ControllerBase
+    public class User : ControllerBase
     {
         [HttpGet]
         //[Authorize]
-        [Route("login/{id}")]
+        [Route("user/{id}")]
         public async Task<IActionResult> GetByIdAsync(long id)
         {
             return Ok();
